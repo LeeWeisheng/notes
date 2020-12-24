@@ -3,17 +3,14 @@
 ## React
 
 - [元素](React/元素.md)
-<!-- - Fiber 介绍
-- 执行流程介绍
-- Fiber 对象
-- ReactRoot 对象
-- FiberRoot 对象
-- RootFiber 对象
-- 更新对象和更新队列
+- [元素类型和组件](React/元素类型和组件.md)
+- Fiber 简介
+- 渲染流程简介
+- Fiber 详解
 - 调度器
+- 协调算法
 - 挂载过程
 - 更新过程
-- 协调算法
 - 事件系统
 - Context 原理
-- Hooks 原理 -->
+- Hooks 原理
