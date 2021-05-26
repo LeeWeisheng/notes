@@ -46,11 +46,11 @@
 
 - 当出现不可处理的错误时，可以优雅的退出服务，并使用 [forever](https://www.npmjs.com/package/forever)、[pm2](https://www.npmjs.com/package/pm2) 等工具进行重启。
 
-- 使用日志记录错误，例如 [pino](https://github.com/pinojs/pino)、[log4js](https://www.npmjs.com/package/log4js) 等。
+- 使用日志记录错误，例如 [pino](https://github.com/pinojs/pino)、[log4js](https://www.npmjs.com/package/log4js)、[winston](https://github.com/winstonjs/winston)、[bunyan](https://github.com/trentm/node-bunyan) 等。
 
 - 使用测试框架测试错误的流向。
 
-- 使用性能监控产品发现错误。
+- 使用性能监控产品发现错误和宕机时间。
 
 - 处理未捕获的异常。
 
@@ -116,3 +116,43 @@
 
 - 使用 [sinon](https://www.npmjs.com/package/sinon)、[node-mocks-http
   ](https://www.npmjs.com/package/node-mocks-http) 等工具隔离测试中间件。
+
+## 5. 部署到生产环境
+
+- 添加线上监控，并在出现异常的时候通知到处理人。
+
+- 使用可聚合的智能日志系统。
+
+- 将 CPU 密集型任务（例如 gzip、SSL）委托给反向代理。
+
+- 使用 .npmrc 文件配置依赖源，使用 lock 文件锁住依赖版本。
+
+- 使用 [pm2](https://www.npmjs.com/package/pm2)、[docker](https://www.docker.com/)、[Kubernetes](https://kubernetes.io/) 等工具保护进程并实现宕机重启。
+
+- 使用集群利用所有的 CPU 内核。
+
+- 创建运维系统，获取系统的运行状态。
+
+- 使用性能监控产品发现错误和宕机时间。
+
+- 从开始便使代码生产就绪。
+
+- 监控并保护内存使用。
+
+- 使用其他服务（例如 Nginx、CDN）管理前端静态资源。
+
+- 保持应用无状态。
+
+- 使用 `npm audit` 周期性检查有漏洞的依赖项。
+
+- 用户发起请求时，生成一个跟踪 ID，且相关日志中记录此 ID。
+
+- 生产环境下设置环境变量 `process.env.NODE_ENV` 为 `"production"`。
+
+- 使部署原子化、自动化、零宕机。
+
+- 使用长期维护（LTS）的 Node.js 版本。
+
+- 日志的存储目标不应该在程序中硬编码，应该直接输出在 `stdout` 中，并由运行环境去指定存储目标。
+
+- 生产环境下使用 `npm ci` 安装依赖包。
