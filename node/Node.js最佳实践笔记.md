@@ -13,7 +13,7 @@
 
 - 将 API 声明与网络配置分离。如：将路由配置、中间件配置等放在 app.ts 文件中，将端口监听、服务器运行等放在 index.ts 文件中。
 
-- 使用配置文件管理配置信息，根据运行环境的不同采用不同的配置文件，敏感信息不要提交到 Git 仓库中，可以使用 [dotenv](https://www.npmjs.com/package/dotenv)、[rc](https://www.npmjs.com/package/rc) 等工具来读取配置文件。
+- 使用配置文件管理配置信息，根据运行环境的不同采用不同的配置文件，机密信息不要提交到 Git 仓库中，可以使用 [dotenv](https://www.npmjs.com/package/dotenv)、[rc](https://www.npmjs.com/package/rc) 等工具来读取配置文件。
 
 ```
 ├── src
@@ -156,3 +156,54 @@
 - 日志的存储目标不应该在程序中硬编码，应该直接输出在 `stdout` 中，并由运行环境去指定存储目标。
 
 - 生产环境下使用 `npm ci` 安装依赖包。
+
+## 6. 安全
+
+- 使用检测工具检测安全问题，例如 [eslint-plugin-security](https://github.com/nodesecurity/eslint-plugin-security)。
+
+- 对于小型服务，可使用中间件限制并发数量，对于大型服务，可使用外部服务来限制。
+
+- 把机密信息从配置文件中抽离出来，通过环境变量设置。
+
+- 访问数据库时，通过 ORM/ODM 库，例如 [Sequelize](https://github.com/sequelize/sequelize)、[knex.js](https://github.com/knex/knex)、[Mongoose](https://github.com/Automattic/mongoose)、[typeorm](https://github.com/typeorm/typeorm)，防止查询注入。
+
+- 通用安全实践：
+
+  - 使用 HTTPS，可选择免费的平台 [Let's Encrypt](https://letsencrypt.org/)。
+
+  - 使用恒定时间算法 [`crypto.timingSafeEqual(a, b)`](https://nodejs.org/api/crypto.html#crypto_crypto_timingsafeequal_a_b) 来比较秘钥值或 Hash 值。
+
+  - 使用 [`crypto.randomBytes(size[, callback])`](https://nodejs.org/api/crypto.html#crypto_crypto_randombytes_size_callback) 方法生成随机字符串。
+
+  - 保护用户的身份信息不被泄露。
+
+  - 更多信息可访问 [OWASP](https://owasp.org/)。
+
+- 使用 [koa-helmet](https://www.npmjs.com/package/koa-helmet) 设置 HTTP 响应头以增加安全性。
+
+- 使用 `npm audit` 周期性检查有漏洞的依赖项。
+
+- 密码或秘钥使用 [bcrypt](https://www.npmjs.com/package/bcrypt) 或 [scrypt](https://www.npmjs.com/package/scrypt-js) 进行加密。
+
+- 转义 HTML、JS 和 CSS 输出。
+
+- 使用 [jsonschema](https://www.npmjs.com/package/jsonschema)、[joi](https://www.npmjs.com/package/joi)、[validator.js](https://github.com/validatorjs/validator.js) 等验证请求参数输入。
+
+- 使用 JWT 时，要支持黑名单。
+
+- 使用 [koa-brute](https://www.npmjs.com/package/koa-brute)、[rate-limiter-flexible](https://www.npmjs.com/package/rate-limiter-flexible) 等限制每个用户允许的登录请求，防止暴力破解。策略：
+
+  - 限制用户登录连续失败的次数。
+  - 限制每个 IP 地址失败的次数。
+
+- 使用非 root 用户运行 Node.js。
+
+- 使用反向代理或中间件限制请求负载大小，以防止 DDOS 攻击。
+
+- 避免使用 `eval`、`new Function()`、`setTimeout`、`setInterval` 动态执行 JavaScript 代码字符串。
+
+- 使用验证工具，例如 [safe-regex](https://github.com/substack/safe-regex)，来验证正则表达式是否安全。
+
+- 避免使用变量加载模块。
+
+- 使用 [sandbox](https://www.npmjs.com/package/sandbox)、[vm2](https://www.npmjs.com/package/vm2) 等工具在沙箱中运行不安全的代码。
