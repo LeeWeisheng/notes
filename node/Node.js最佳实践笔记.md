@@ -2,6 +2,7 @@
 
 - [Node.js Best Practices](https://github.com/goldbergyoni/nodebestpractices)
 - [The Twelve-Factor App](https://12factor.net/)
+- [The Open Web Application Security Project](https://owasp.org/)
 
 ## 1. 项目结构
 
@@ -207,3 +208,23 @@
 - 避免使用变量加载模块。
 
 - 使用 [sandbox](https://www.npmjs.com/package/sandbox)、[vm2](https://www.npmjs.com/package/vm2) 等工具在沙箱中运行不安全的代码。
+
+- 在使用子进程执行用户输入时，需要进行脱敏处理。
+
+- 返回错误给客户端时，应隐藏错误详情。
+
+- 对 NPM 和 Yarn，配置 2FA。
+
+- 隐藏技术栈信息，例如 `X-Powered-By` 头部信息。
+
+- 通过显式设置进程应崩溃的情况，以避免 DOS 攻击。
+
+- 避免不安全的重定向。
+
+- 避免将敏感信息发布到 npm 仓库。
+
+## 7. 性能优化
+
+- 避免阻塞事件循环。
+
+- 使用原生 JS，避免使用类似 Lodash 这种工具库。
