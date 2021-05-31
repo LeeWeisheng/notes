@@ -4,16 +4,16 @@
 
 - 基础：Module、Events、Stream。
 
+- 工具：Path、URL、Query Strings、Utilities。
+
 - 系统：OS、File System。
+
+- 网络：Net、HTTP、HTTP/2、HTTPS、DNS、UDP。
 
 - 进程：Process、Child Process、Worker Threads、Cluster。
 
 - 加密：Crypto、TLS/SSL。
 
-- 网络：Net、HTTP、HTTP/2、HTTPS、DNS、UDP。
-
 - 交互：REPL、TTY、Readline。
 
-- 工具：Path、URL、Query Strings、Utilities、String Decoder。
-
-- 其他：Assert、Zlib、Performance Hooks、VM、V8。
+- 其他：Assert、Zlib、String Decoder、Performance Hooks、VM、V8。
