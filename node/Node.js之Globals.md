@@ -54,7 +54,7 @@ Node.js 的[模块包裹器](https://github.com/nodejs/node/blob/v14.x/lib/inter
 });
 ```
 
-在执行的时候，Node.js 为包裹器注入了五个与当前模块相关的五个参数：
+在执行的时候，Node.js 为包裹器注入了五个与当前模块相关的参数：
 
 - `exports`：导出对象。
 - `require`：加载函数。
