@@ -1,0 +1,69 @@
+# Node.js 之事件循环
+
+在同步任务执行完毕后，执行微任务，开启事件循环，宏任务执行完毕后立即执行微任务。无论是宏任务队列还是微任务队列，都是先进先出。
+
+## 1. 阶段
+
+```
+               ┌───────────────────────────┐
+               │         sync task         ├─ 同步任务
+               └─────────────┬─────────────┘
+               ┌─────────────┴─────────────┐
+               │         microtask         ├─ 微任务
+               └─────────────┬─────────────┘
+               ┌─────────────┴─────────────┐
+            ┌─>│           timers          ├─ 定时器回调
+            │  └─────────────┬─────────────┘
+            │  ┌─────────────┴─────────────┐
+            │  │     pending callbacks     ├─ 延迟到下一次循环迭代的 I/O 回调
+            │  └─────────────┬─────────────┘
+            │  ┌─────────────┴─────────────┐
+            │  │       idle, prepare       ├─ 系统内部使用
+            │  └─────────────┬─────────────┘
+            │  ┌─────────────┴─────────────┐
+event loop ─┤  │           poll            ├─ I/O 回调
+            │  └─────────────┬─────────────┘
+            │  ┌─────────────┴─────────────┐
+            │  │           check           ├─ setImmediate 回调
+            │  └─────────────┬─────────────┘
+            │  ┌─────────────┴─────────────┐
+            │  │      close callbacks      ├─ close 回调
+            │  └─────────────┬─────────────┘
+            │  ┌─────────────┴─────────────┐
+            └──┤         microtask         ├─ 微任务
+               └───────────────────────────┘
+```
+
+## 2. 方法
+
+- `setTimeout`：将任务延迟到下一次事件循环。
+- `setImmediate`：在 I/O 回调执行完毕后再执行。
+- `promise.then`：将任务放到微任务队列中。
+- `queueMicrotask`：与 `promise.then` 一样，也是将任务放到微任务队列中。
+- `process.nextTick`：在当前任务执行完毕后立即执行，此方法才应该是立即执行函数。
+
+```js
+setTimeout(() => console.log("setTimeout 1"));
+setImmediate(() => console.log("setImmediate 1"));
+queueMicrotask(() => console.log("queueMicrotask 1"));
+Promise.resolve().then(() => console.log("Promise 1"));
+process.nextTick(() => console.log("process.nextTick 1"));
+
+setTimeout(() => console.log("setTimeout 2"));
+setImmediate(() => console.log("setImmediate 2"));
+queueMicrotask(() => console.log("queueMicrotask 2"));
+Promise.resolve().then(() => console.log("Promise 2"));
+process.nextTick(() => console.log("process.nextTick 2"));
+
+// =>
+// process.nextTick 1
+// process.nextTick 2
+// queueMicrotask 1
+// Promise 1
+// queueMicrotask 2
+// Promise 2
+// setTimeout 1
+// setTimeout 2
+// setImmediate 1
+// setImmediate 2
+```
