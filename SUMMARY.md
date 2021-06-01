@@ -4,5 +4,6 @@
 
 - [Node.js 内置模块分类](node/Node.js内置模块分类.md)
 - [Node.js 之 Globals](node/Node.js之Globals.md)
+- [Node.js 之 Timers](Node.js之Timers.md)
 - [Node.js 之事件循环](node/Node.js之事件循环.md)
 - [Node.js 最佳实践笔记](node/《Node.js最佳实践》笔记.md)
