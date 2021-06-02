@@ -8,9 +8,11 @@ Node.js 中，一个文件即是一个模块，且文件的代码在下面的包
 });
 ```
 
-那么，什么是一个模块呢？一个模块其实就是 Module 类的实例。在文件代码运行之前，会先 `new` 一个 Module，生成实例 `module`，然后将 `module` 实例上的属性注入到包裹器函数的参数中。
+那么，什么是一个模块呢？一个模块其实就是 Module 构造函数的实例。在文件代码运行之前，会先 `new` 一个 Module，生成实例 `module`，然后将 `module` 实例上的属性注入到包裹器函数的参数中。
 
 ## 1. `module` 实例
+
+`module` 由 [Module 构造函数](https://github.com/nodejs/node/blob/v14.x/lib/internal/modules/cjs/loader.js#L150)实例化而来，它有以下属性和方法：
 
 - `module.id`：通常情况下为文件的完整绝对路径。经过测试，入口文件的 `id` 为 `"."`。
 - `module.filename`：当前模块文件的绝对路径，与 `__filename` 一样。
