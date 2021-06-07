@@ -9,4 +9,5 @@
 - [Node.js 之 Module](node/Node.js之Module.md)
 - [Node.js 之 Errors](node/Node.js之Errors.md)
 - [Node.js 之 Console](node/Node.js之Console.md)
+- [Node.js 之 Buffer](node/Node.js之Buffer.md)
 - [Node.js 最佳实践笔记](node/Node.js最佳实践笔记.md)
