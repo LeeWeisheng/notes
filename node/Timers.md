@@ -1,4 +1,4 @@
-# Node.js 之 Timers
+# Timers
 
 ## 1. 方法
 

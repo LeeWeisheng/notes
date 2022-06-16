@@ -1,4 +1,4 @@
-# Node.js 之 Module
+# Module
 
 Node.js 中，一个文件即是一个模块，且文件的代码在下面的包裹器函数中运行。
 

@@ -1,4 +1,4 @@
-# Node.js 之 Console
+# Console
 
 Console 打印并不总是同步的，也不总是异步的。
 

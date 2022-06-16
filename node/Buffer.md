@@ -1,4 +1,4 @@
-# Node.js 之 Buffer
+# Buffer
 
 Node.js 的 Buffer 基于 JavaScript 的 [Uint8Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)，它在 V8 引擎之外分配固定大小（32 位操作系统下最大约为 1 GB）的原始内存，旨在处理原始二进制数据。Buffer 是一个可迭代的类数组，每项的数值范围在 0 ~ 255 之间，即一个字节的存储大小。使用 Buffer 的目的之一就是为了速度。
 
